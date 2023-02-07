@@ -1,5 +1,5 @@
 <div class="container ">
-  <b>{{ nombreUsuario}}</b>
+  <b>{{ userName }}</b>
   <div *ngIf="!isAddedUser">
 
     
@@ -11,6 +11,7 @@
     <br />
 
     <div style="text-align: right;">
+      <button (click)="query()" class="btn btn-info" >Query</button>
       <button (click)="access()" class="btn btn-primary" [disabled]=!userName>Save</button>
     </div>
 
