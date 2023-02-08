@@ -33,8 +33,8 @@ export class ChatService {
             });
         });
     }
-    public setUser(user){
-        this.socket.emit('add user', user);
+    public setUser(user):Observable<any> {
+        return this.socket.emit('add user', user);
     }
 
 }
