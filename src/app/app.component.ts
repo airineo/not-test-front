@@ -36,11 +36,12 @@ export class AppComponent implements OnInit {
        console.log("Setting user..."|| new Date());
        this.setUser();
        console.log("after of response ..."||new Date());
-       this.userNotification = new userNotification( "100", "mockuser", "gila@gmail.com", new Date(),  777567343,  ["Finance", "Sports"], ["SMS", "E-Mail"] );
+       this.userNotification = new userNotification( "103", "mockuser3", "gila@gmail.com", new Date(),  777567343,  ["Finance", "Sports"], ["SMS", "E-Mail"] );
        console.log(this.userNotification);
        this.http.post("http://localhost:3000/addUser", this.userNotification).subscribe(data => {
         
           console.log( data);
+          this.query();  //to refresh the history
         
        }, error => {
           console.log("error");
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
     console.log("searching...");
     this.http.get("http://localhost:3000/history").subscribe(data => {
         
-        console.log( data);
+        
         this.data = data;
         this.dataSource = new MatTableDataSource(this.data);
         
