@@ -5,6 +5,7 @@ import { ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { userNotification } from './model/userNotification';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +25,17 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   columnsToDisplay = ['id', 'name', 'email', 'creationDate', 'phoneNumber', 'subscribed', 'channels'];
   userNotification : userNotification;
-  constructor(private chatService: ChatService, private http: HttpClient) { 
+  myForm: FormGroup;
+
+ 
+  
+  constructor(private chatService: ChatService, private http: HttpClient, public form: FormBuilder,) { 
       this.query();
+      this.myForm = this.form.group({
+        message: ['', Validators.required]
+      });
   }
+ 
 
   sendMessage(){
      this.chatService.sendMessage(this.message);
@@ -36,7 +45,7 @@ export class AppComponent implements OnInit {
        console.log("Setting user..."|| new Date());
        this.setUser();
        console.log("after of response ..."||new Date());
-       this.userNotification = new userNotification( "103", "mockuser3", "gila@gmail.com", new Date(),  777567343,  ["Finance", "Sports"], ["SMS", "E-Mail"] );
+       this.userNotification = new userNotification( "108", "mockuser3", "gila@gmail.com", new Date(),  777567343,  ["Finance", "Sports"], ["SMS", "E-Mail"] );
        console.log(this.userNotification);
        this.http.post("http://localhost:3000/addUser", this.userNotification).subscribe(data => {
         
